@@ -34,35 +34,33 @@ body {
     gap: 40px;
 }
 
-/* Full-width header container */
+/* Header Section */
 .header-container {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 20px 40px;
-    background-color: #f5f5f5;
-    border-bottom: 2px solid #ccc;
     flex-wrap: wrap;
-    margin-bottom: 40px; /* space below header */
+    padding: 20px 40px;
+    border-bottom: 2px solid #ccc;
+    gap: 40px; /* space between pic, text, contact */
+    margin-bottom: 30px; /* space below header */
 }
 
 /* Profile picture */
-.header-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 20px 80px; /* increased horizontal padding */
-    background-color: #f5f5f5;
-    border-bottom: 2px solid #ccc;
-    flex-wrap: wrap;
-    margin-bottom: 20px; /* space below header */
-    gap: 60px; /* extra space between picture, text, and contact info */
+.profile-pic {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center 40%; /* centers face */
+    border: 2px solid #ddd;
+    flex-shrink: 0; /* prevents shrinking on smaller screens */
 }
 
-/* Center text: Name + Welcome */
+/* Center text */
 .header-text {
     text-align: center;
-    flex: 1; /* take remaining space */
+    flex: 1 1 300px; /* responsive min width */
 }
 
 .header-text h1 {
@@ -86,19 +84,18 @@ body {
     color: #555;
 }
 
-/* Graduation section: diploma + text */
+/* Graduation section */
 .graduation-section {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 20px;
     flex-wrap: wrap;
-    margin-top: 40px; /* spacing above */
-    margin-bottom: 40px; /* spacing below */
+    margin-bottom: 40px;
 }
 
-.graduation-section .diploma-pic {
-    max-width: 100px;
+.diploma-pic {
+    width: 70px; /* ~2/3 original size */
     height: auto;
     border-radius: 10px;
 }
