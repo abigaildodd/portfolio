@@ -45,11 +45,13 @@
         }
 
         .header-section .profile-pic {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid #ddd;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;          /* makes it circular */
+    object-fit: cover;           /* fills the circle without stretching */
+    object-position: center 40%; /* shift visible area down to center face */
+    border: 2px solid #ddd;
+}
         }
 
         .header-text h1 {
@@ -90,27 +92,35 @@
             margin-bottom: 5px;
         }
 
-        /* Links */
-        a {
-            text-decoration: none;
-            color: #0077b5; /* LinkedIn blue */
-            font-weight: 600;
-        }
+      /* Links */
+a {
+    text-decoration: none;
+    color: #0077b5; /* LinkedIn blue */
+    font-weight: 600;
+}
 
-        a:hover {
-            text-decoration: underline;
-        }
+a:hover {
+    text-decoration: underline;
+}
 
-        /* Projects button */
-        .button {
-            display: inline-block;
-            padding: 10px 20px;
-            margin-top: 10px;
-            background-color: #0077b5;
-            color: #fff;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
+/* Buttons */
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-top: 10px;
+    background-color: #fff;       /* white background */
+    color: #0077b5;               /* same as link text */
+    border: 2px solid #0077b5;    /* blue border */
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.button:hover {
+    background-color: #0077b5;    /* fill with blue on hover */
+    color: #fff;                  /* text turns white on hover */
+}
 
         .button:hover {
             background-color: #005582;
