@@ -30,9 +30,12 @@ a:hover {
 .main-container {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    text-align: center;
+    align-items: center;    /* centers items inside container */
+    text-align: center;     /* centers text inside items */
     gap: 20px;
+    padding: 40px 20px;    /* optional spacing around content */
+    max-width: 800px;       /* limits how wide the container can stretch */
+    margin: 0 auto;         /* centers the container itself on the page */
 }
 
 /* IMAGES */
