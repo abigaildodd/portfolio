@@ -47,13 +47,16 @@ body {
 }
 
 /* Profile picture */
-.header-container .profile-pic {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    object-fit: cover;
-    object-position: center 40%;
-    border: 2px solid #ddd;
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 80px; /* increased horizontal padding */
+    background-color: #f5f5f5;
+    border-bottom: 2px solid #ccc;
+    flex-wrap: wrap;
+    margin-bottom: 20px; /* space below header */
+    gap: 60px; /* extra space between picture, text, and contact info */
 }
 
 /* Center text: Name + Welcome */
