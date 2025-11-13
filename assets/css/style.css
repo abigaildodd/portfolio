@@ -1,19 +1,25 @@
 body {
-    font-family: "Arial", sans-serif;
-    background-color: #fdfdfd;
+    font-family: "Roboto", sans-serif;
+    background-color: #F2F0EF;
+    font-weight: 400;
     color: #333;
     padding: 20px;
 }
 
 /* HEADINGS */
-h1, h2, h3 {
-    font-family: "Georgia", serif;
-    color: #2a9d8f;
+h1{
+    font-family: "Roboto", serif;
+    color: #333;
+    font-weight: 900;
 }
+h2{
+    font-weight: 700;}
+h3{
+    font-weight:500;}
 
 /* LINKS */
 a {
-    color: #e76f51;
+    color: #333;
     text-decoration: none;
 }
 a:hover {
