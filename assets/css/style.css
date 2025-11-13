@@ -38,12 +38,14 @@ a:hover {
     margin: 0 auto;         /* centers the container itself on the page */
 }
 
-/* IMAGES */
-.profile-pic, .diploma-pic {
-    max-width: 300px;
-    border-radius: 10px;
-    margin: 10px 0;
+.header-section .profile-pic {
+    width: 150px;            /* fixed width */
+    height: 150px;           /* fixed height to make a perfect square */
+    border-radius: 50%;      /* makes it circular */
+    object-fit: cover;       /* crops to fill the circle, keeping center */
+    border: 2px solid #ddd;  /* optional: subtle border */
 }
+
 
 /* PROJECT CARDS (optional) */
 .project-card {
