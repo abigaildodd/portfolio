@@ -1,0 +1,47 @@
+body {
+    font-family: "Arial", sans-serif;
+    background-color: #fdfdfd;
+    color: #333;
+    padding: 20px;
+}
+
+/* HEADINGS */
+h1, h2, h3 {
+    font-family: "Georgia", serif;
+    color: #2a9d8f;
+}
+
+/* LINKS */
+a {
+    color: #e76f51;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+
+/* LAYOUT */
+.main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 20px;
+}
+
+/* IMAGES */
+.profile-pic, .diploma-pic {
+    max-width: 300px;
+    border-radius: 10px;
+    margin: 10px 0;
+}
+
+/* PROJECT CARDS (optional) */
+.project-card {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 15px;
+    margin: 10px;
+    width: 300px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
