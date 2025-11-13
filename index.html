@@ -71,33 +71,52 @@ body {
     margin: 0 auto;
 }
 
-/* Header section: profile + welcome text */
-.header-section {
+/* Full-width header container */
+.header-container {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-    flex-wrap: wrap;
+    align-items: center;      /* vertical alignment of items */
+    justify-content: space-between; /* spread items across the row */
+    padding: 20px 40px;
+    background-color: #f5f5f5;
+    border-bottom: 2px solid #ccc; /* optional horizontal line */
+    flex-wrap: wrap;          /* wrap on smaller screens */
 }
 
-.header-section .profile-pic {
+/* Profile picture */
+.header-container .profile-pic {
     width: 150px;
     height: 150px;
-    border-radius: 50%;          /* circular */
-    object-fit: cover;           /* crop image to fill circle */
-    object-position: center 40%; /* shift face down */
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center 40%;
     border: 2px solid #ddd;
+}
+
+/* Center text: Name + Welcome */
+.header-text {
+    text-align: center;
+    flex: 1; /* take remaining space */
 }
 
 .header-text h1 {
     font-size: 2.5rem;
     font-weight: 700;
-    margin-bottom: 10px;
 }
 
 .header-text h2 {
     font-size: 1.8rem;
-    font-weight: 700;
+    font-weight: 500;
+}
+
+/* Contact info */
+.contact-info {
+    text-align: right;
+}
+
+.contact-info p {
+    margin: 2px 0;
+    font-weight: 500;
+    color: #555;
 }
 
 /* Graduation section: diploma + text */
@@ -155,20 +174,18 @@ a {
 </head>
 <body>
 
-<div class="main-container">
-
-    <!-- Header section -->
-<div class="header-section">
+<!-- Header Section -->
+<div class="header-container">
     <img src="images/IMG_3866.jpeg" alt="Abigail Dodd" class="profile-pic">
+
     <div class="header-text">
         <h1>Abigail Dodd</h1>
         <h2>Welcome to my portfolio</h2>
+    </div>
 
-        <!-- Contact info -->
-        <div class="contact-info">
-            <p>Phone: (123) 456-7890</p>
-            <p>Email: abigail@example.com</p>
-        </div>
+    <div class="contact-info">
+        <p>Phone: (123) 456-7890</p>
+        <p>Email: abigail@example.com</p>
     </div>
 </div>
 
@@ -187,7 +204,7 @@ a {
     
 <!-- Courses Section -->
 <div class="courses-section">
-    <h2 class="section-title">Selected Courses</h2>
+    <h2 class="section-title">Relevant Coursework</h2>
     <div class="course-cards">
         <div class="course-card">
             <strong>Calculus I</strong>
