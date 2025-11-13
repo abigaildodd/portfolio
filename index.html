@@ -7,10 +7,7 @@
     
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    
-    <!-- CSS -->
-    <link rel="stylesheet" href="assets/css/style.css">
-    
+
     <style>
         /* Basic Reset */
         * {
@@ -26,44 +23,70 @@
             color: #333;
         }
 
-        /* Main container centering */
+        /* Main container */
         .main-container {
             display: flex;
             flex-direction: column;
             align-items: center;
             text-align: center;
-            gap: 20px;
+            gap: 40px;
             padding: 40px 20px;
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
         }
 
-        /* Headings */
-        h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
+        /* Header section: profile + welcome text */
+        .header-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
         }
 
-        h2 {
+        .header-section .profile-pic {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #ddd;
+        }
+
+        .header-text h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .header-text h2 {
             font-size: 1.8rem;
             font-weight: 700;
         }
 
-        /* Images */
-        .profile-pic, .diploma-pic {
-            max-width: 300px;
+        /* Graduation section: diploma + text */
+        .graduation-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .graduation-section .diploma-pic {
+            max-width: 100px; /* 2/3 of original size */
+            height: auto;
             border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
 
-        /* Lists */
-        ul {
+        .graduation-text h2 {
+            margin-bottom: 10px;
+        }
+
+        .graduation-text ul {
             list-style: none;
-            margin-top: 10px;
-            margin-bottom: 20px;
         }
 
-        ul li {
+        .graduation-text li {
             margin-bottom: 5px;
         }
 
@@ -78,7 +101,7 @@
             text-decoration: underline;
         }
 
-        /* Buttons style for projects link */
+        /* Projects button */
         .button {
             display: inline-block;
             padding: 10px 20px;
@@ -97,22 +120,32 @@
 <body>
 
 <div class="main-container">
-    <h1>Welcome to my Portfolio!</h1>
 
-    <img src="images/IMG_3866.jpeg" alt="Abigail Dodd" class="profile-pic">
+    <!-- Header section -->
+    <div class="header-section">
+        <img src="images/IMG_3866.jpeg" alt="Abigail Dodd" class="profile-pic">
+        <div class="header-text">
+            <h1>Welcome to my Portfolio!</h1>
+            <h2>My name is Abigail Dodd</h2>
+        </div>
+    </div>
 
-    <h2>My name is Abigail Dodd</h2>
+    <!-- Graduation section -->
+    <div class="graduation-section">
+        <img src="images/Seal_of_UNT.png" alt="UNT Diploma" class="diploma-pic">
+        <div class="graduation-text">
+            <h2>Student at the University of North Texas</h2>
+            <ul>
+                <li>Major: Mathematics and Economics</li>
+                <li>GPA: 3.700</li>
+            </ul>
+        </div>
+    </div>
 
-    <img src="images/Seal_of_UNT.png" alt="UNT Diploma" class="diploma-pic">
-
-    <h2>Student at the University of North Texas</h2>
-    <ul>
-        <li>Major: Mathematics and Economics</li>
-        <li>GPA: 3.700</li>
-    </ul>
-
+    <!-- Links -->
     <p><a href="https://www.linkedin.com/in/abigail-dodd-/" target="_blank">LinkedIn</a></p>
     <p><a href="projects.html" class="button">View My Projects</a></p>
+
 </div>
 
 </body>
