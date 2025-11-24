@@ -193,7 +193,7 @@
   <!-- RIGHT RANDOM SYMBOL BAR -->
   <div class="side-bar right" id="rightBar"></div>
 
-  <script>
+ <script>
 const symbols = [
     "∑","π","μ","η","∫","σ","√","∞","≈","∆","¥",
     "=SUM()","=IF()","=AVERAGE()","=STDEV()","R²","β","γ","θ","λ"
@@ -204,48 +204,52 @@ function placeRandomSymbols(barId, count = 15) {
     const placed = [];
 
     for (let i = 0; i < count; i++) {
-        let sym = document.createElement("div");
+        const sym = document.createElement("div");
         sym.classList.add("side-symbol");
         sym.textContent = symbols[Math.floor(Math.random() * symbols.length)];
 
+        bar.appendChild(sym); // temporarily add to DOM to measure size
+        sym.style.visibility = 'hidden'; // hide while positioning
+
         let tries = 0;
-        let top, left, size;
+        let top, left, size, rotate;
         let overlapping;
 
         do {
-            top = Math.random() * 90;
-            left = Math.random() * 60;
-            size = Math.random() * 2 + 1;
+            size = Math.random() * 2 + 1; // 1-3 rem
             sym.style.fontSize = size + "rem";
-            sym.style.transform = `rotate(${Math.random() * 80 - 40}deg)`;
+            rotate = Math.random() * 80 - 40; // -40° to 40°
+            sym.style.transform = `rotate(${rotate}deg)`;
 
-            // Rough bounding box
-            const width = sym.offsetWidth || 20 * size; 
-            const height = sym.offsetHeight || 20 * size;
+            const width = sym.offsetWidth;
+            const height = sym.offsetHeight;
+
+            top = Math.random() * (100 - height/10); // percent approximation
+            left = Math.random() * (100 - width/10);
 
             overlapping = placed.some(pos => {
                 return !(
-                    left + width < pos.left ||
-                    left > pos.left + pos.width ||
-                    top + height < pos.top ||
-                    top > pos.top + pos.height
+                    left + width/10 < pos.left ||
+                    left > pos.left + pos.width/10 ||
+                    top + height/10 < pos.top ||
+                    top > pos.top + pos.height/10
                 );
             });
 
             tries++;
-        } while (overlapping && tries < 50);
+        } while (overlapping && tries < 100);
 
         // Save bounding box
-        placed.push({top, left, width: 20*size, height: 20*size});
+        placed.push({top, left, width: sym.offsetWidth, height: sym.offsetHeight});
 
         sym.style.top = top + "%";
         sym.style.left = left + "%";
-        bar.appendChild(sym);
+        sym.style.visibility = 'visible';
     }
 }
 
-placeRandomSymbols("leftBar", 30);
-placeRandomSymbols("rightBar", 30);
+placeRandomSymbols("leftBar", 20);
+placeRandomSymbols("rightBar", 20);
 </script>
 
   <div class="main-container">
