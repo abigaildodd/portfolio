@@ -201,57 +201,54 @@ const symbols = [
 
 function placeRandomSymbols(barId, count = 15) {
     const bar = document.getElementById(barId);
+    bar.style.position = "relative"; // ensure children are relative to bar
     const placed = [];
 
     for (let i = 0; i < count; i++) {
         const sym = document.createElement("div");
         sym.classList.add("side-symbol");
         sym.textContent = symbols[Math.floor(Math.random() * symbols.length)];
-
-        bar.appendChild(sym); // temporarily add to DOM to measure size
-        sym.style.visibility = 'hidden'; // hide while positioning
+        bar.appendChild(sym);
 
         let tries = 0;
-        let top, left, size, rotate;
-        let overlapping;
+        let overlap = true;
+        let size, rotate, x, y, width, height;
 
-        do {
-            size = Math.random() * 2 + 1; // 1-3 rem
-            sym.style.fontSize = size + "rem";
-            rotate = Math.random() * 80 - 40; // -40° to 40°
+        while (overlap && tries < 200) {
+            size = Math.random() * 24 + 16; // font size in px
+            rotate = Math.random() * 80 - 40; // degrees
+
+            sym.style.fontSize = size + "px";
             sym.style.transform = `rotate(${rotate}deg)`;
 
-            const width = sym.offsetWidth;
-            const height = sym.offsetHeight;
+            width = sym.offsetWidth;
+            height = sym.offsetHeight;
 
-            top = Math.random() * (100 - height/10); // percent approximation
-            left = Math.random() * (100 - width/10);
+            x = Math.random() * (bar.clientWidth - width);
+            y = Math.random() * (bar.clientHeight - height);
 
-            overlapping = placed.some(pos => {
+            overlap = placed.some(pos => {
                 return !(
-                    left + width/10 < pos.left ||
-                    left > pos.left + pos.width/10 ||
-                    top + height/10 < pos.top ||
-                    top > pos.top + pos.height/10
+                    x + width < pos.x ||
+                    x > pos.x + pos.width ||
+                    y + height < pos.y ||
+                    y > pos.y + pos.height
                 );
             });
 
             tries++;
-        } while (overlapping && tries < 100);
+        }
 
-        // Save bounding box
-        placed.push({top, left, width: sym.offsetWidth, height: sym.offsetHeight});
-
-        sym.style.top = top + "%";
-        sym.style.left = left + "%";
-        sym.style.visibility = 'visible';
+        placed.push({x, y, width, height});
+        sym.style.left = x + "px";
+        sym.style.top = y + "px";
     }
 }
 
+// Place symbols
 placeRandomSymbols("leftBar", 20);
 placeRandomSymbols("rightBar", 20);
 </script>
-
   <div class="main-container">
 
     <!-- Header Section -->
