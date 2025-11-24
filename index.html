@@ -194,37 +194,59 @@
   <div class="side-bar right" id="rightBar"></div>
 
   <script>
-    // RANDOM SYMBOL GENERATOR
-    const symbols = [
-      "∑","π","μ","η","∫","σ","√","∞","≈","∆","¥",
-      "=SUM()","=IF()","=AVERAGE()","=STDEV()","R²","β","γ","θ","λ"
-    ];
+const symbols = [
+    "∑","π","μ","η","∫","σ","√","∞","≈","∆","¥",
+    "=SUM()","=IF()","=AVERAGE()","=STDEV()","R²","β","γ","θ","λ"
+];
 
-    function placeRandomSymbols(barId, count = 15) {
-      const bar = document.getElementById(barId);
-      for (let i = 0; i < count; i++) {
-        const sym = document.createElement("div");
+function placeRandomSymbols(barId, count = 15) {
+    const bar = document.getElementById(barId);
+    const placed = [];
+
+    for (let i = 0; i < count; i++) {
+        let sym = document.createElement("div");
         sym.classList.add("side-symbol");
         sym.textContent = symbols[Math.floor(Math.random() * symbols.length)];
 
-        // Random position & styling
-        const top = Math.random() * 90;
-        const left = Math.random() * 60;
-        const size = Math.random() * 2 + 1; // 1‑3 rem
-        const rotate = Math.random() * 80 - 40; // -40° to +40°
+        let tries = 0;
+        let top, left, size;
+        let overlapping;
+
+        do {
+            top = Math.random() * 90;
+            left = Math.random() * 60;
+            size = Math.random() * 2 + 1;
+            sym.style.fontSize = size + "rem";
+            sym.style.transform = `rotate(${Math.random() * 80 - 40}deg)`;
+
+            // Rough bounding box
+            const width = sym.offsetWidth || 20 * size; 
+            const height = sym.offsetHeight || 20 * size;
+
+            overlapping = placed.some(pos => {
+                return !(
+                    left + width < pos.left ||
+                    left > pos.left + pos.width ||
+                    top + height < pos.top ||
+                    top > pos.top + pos.height
+                );
+            });
+
+            tries++;
+        } while (overlapping && tries < 50);
+
+        // Save bounding box
+        placed.push({top, left, width: 20*size, height: 20*size});
 
         sym.style.top = top + "%";
         sym.style.left = left + "%";
-        sym.style.fontSize = size + "rem";
-        sym.style.transform = `rotate(${rotate}deg)`;
-
         bar.appendChild(sym);
-      }
     }
+}
 
-    placeRandomSymbols("leftBar", 30);
-    placeRandomSymbols("rightBar", 30);
-  </script>
+placeRandomSymbols("leftBar", 30);
+placeRandomSymbols("rightBar", 30);
+</script>
 
   <div class="main-container">
 
