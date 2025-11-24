@@ -30,23 +30,21 @@
       width: 110px;
       background-color: #000;
       color: #fff;
-      overflow: hidden;
+      overflow: visible;
       z-index: 999;
       pointer-events: none;
     }
 
-    .side-bar.left { left: 0; }
-    .side-bar.right { right: 0; }
+    .side-bar.left { left: 0; border-left: 2px solid #fff; }
+    .side-bar.right { right: 0; border-right: 2px solid #fff; }
 
     .side-symbol {
       position: absolute;
       opacity: 0.85;
       font-weight: bold;
       white-space: nowrap;
-      /* Use Cabin Sketch for “chalky” look */
       font-family: 'Cabin Sketch', cursive;
       user-select: none;
-      /* Slight “chalk glow”/text shadow to simulate chalk dust */
       text-shadow: 0 0 1px #fff, 0 0 3px #fff;
       color: #fff;
     }
@@ -186,82 +184,77 @@
 </head>
 
 <body>
-
   <!-- LEFT RANDOM SYMBOL BAR -->
   <div class="side-bar left" id="leftBar"></div>
 
   <!-- RIGHT RANDOM SYMBOL BAR -->
   <div class="side-bar right" id="rightBar"></div>
 
-<script>
-const symbols = [
-    "∑","π","μ","η","∫","σ","√","∞","≈","∆","∂","∏","∀","∃","∅","ε","±","∈","∮",
-    "=SUM()","=IF()","=AVERAGE()","=STDEV()","R²","β","γ=f(x)","θ","λ","≅"
-];
+  <script>
+    const symbols = [
+        "∑","π","μ","η","∫","σ","√","∞","≈","∆","∂","∏","∀","∃","∅","ε","±","∈","∮",
+        "=SUM()","=IF()","=AVERAGE()","=STDEV()","R²","β","γ=f(x)","θ","λ","≅"
+    ];
 
-function placeRandomSymbols(barId, count = 15) {
-    const bar = document.getElementById(barId);
-    const placed = [];
+    function placeRandomSymbols(barId, count = 20) {
+        const bar = document.getElementById(barId);
+        const placed = [];
 
-    for (let i = 0; i < count; i++) {
-        const sym = document.createElement("div");
-        sym.classList.add("side-symbol");
-        sym.textContent = symbols[Math.floor(Math.random() * symbols.length)];
-        sym.style.position = "absolute";
-        sym.style.visibility = "hidden"; // hide while measuring
-        bar.appendChild(sym);
+        for (let i = 0; i < count; i++) {
+            const sym = document.createElement("div");
+            sym.classList.add("side-symbol");
+            sym.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+            sym.style.position = "absolute";
+            sym.style.visibility = "hidden"; // hide while measuring
+            bar.appendChild(sym);
 
-        let overlap = true;
-        let tries = 0;
+            let overlap = true;
+            let tries = 0;
 
-        while (overlap && tries < 300) {
-            const size = Math.random() * 24 + 16; // font-size px
-            const rotate = Math.random() * 80 - 40; // degrees
-            sym.style.fontSize = size + "px";
-            sym.style.transform = `rotate(${rotate}deg)`;
+            while (overlap && tries < 300) {
+                const size = Math.random() * 24 + 16; // font-size px
+                const rotate = Math.random() * 80 - 40; // degrees
+                sym.style.fontSize = size + "px";
+                sym.style.transform = `rotate(${rotate}deg)`;
 
-            // Random position
-            const x = Math.random() * (bar.clientWidth - size);
-            const y = Math.random() * (bar.clientHeight - size);
-            sym.style.left = x + "px";
-            sym.style.top = y + "px";
+                // Random position inside sidebar
+                const x = Math.random() * (bar.clientWidth - size);
+                const y = Math.random() * (bar.clientHeight - size);
+                sym.style.left = x + "px";
+                sym.style.top = y + "px";
 
-            const rect = sym.getBoundingClientRect();
+                const rect = sym.getBoundingClientRect();
 
-            overlap = placed.some(pos => {
-                return !(
-                    rect.right < pos.left ||
-                    rect.left > pos.right ||
-                    rect.bottom < pos.top ||
-                    rect.top > pos.bottom
-                );
-            });
+                overlap = placed.some(pos => {
+                    return !(
+                        rect.right < pos.left ||
+                        rect.left > pos.right ||
+                        rect.bottom < pos.top ||
+                        rect.top > pos.bottom
+                    );
+                });
 
-            tries++;
+                tries++;
+            }
+
+            placed.push(sym.getBoundingClientRect());
+            sym.style.visibility = "visible";
         }
-
-        const finalRect = sym.getBoundingClientRect();
-        placed.push(finalRect);
-
-        sym.style.visibility = "visible";
     }
-}
 
-// Run the function
-placeRandomSymbols("leftBar", 20);
-placeRandomSymbols("rightBar", 20);
-</script>
+    // Initialize symbols
+    placeRandomSymbols("leftBar", 20);
+    placeRandomSymbols("rightBar", 20);
+  </script>
+
   <div class="main-container">
-
     <!-- Header Section -->
     <div class="header-container">
       <img src="images/IMG_3866.jpeg" alt="Abigail Dodd" class="profile-pic">
-
       <div class="header-text">
         <h1>Abigail Dodd</h1>
         <h2><strong>Welcome to my portfolio</strong></h2>
       </div>
-
       <div class="contact-info">
         <p>Phone: (123) 456-7890</p>
         <p>Email: abigail@example.com</p>
