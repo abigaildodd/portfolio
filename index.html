@@ -23,7 +23,32 @@ body {
     color: #333;
 }
 
-/* Main container */
+/* SIDE BARS */
+.side-bar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: 110px;
+    background-color: #000;
+    color: #fff;
+    overflow: hidden;
+    z-index: 999;
+    pointer-events: none;
+}
+
+.side-bar.left { left: 0; }
+.side-bar.right { right: 0; }
+
+.side-symbol {
+    position: absolute;
+    opacity: 0.75;
+    font-weight: bold;
+    white-space: nowrap;
+    font-family: monospace;
+    user-select: none;
+}
+
+/* MAIN CONTAINER */
 .main-container {
     max-width: 900px;
     margin: 0 auto;
@@ -42,25 +67,23 @@ body {
     flex-wrap: wrap;
     padding: 20px 40px;
     border-bottom: 2px solid #ccc;
-    gap: 40px; /* space between pic, text, contact */
-    margin-bottom: 30px; /* space below header */
+    gap: 40px;
+    margin-bottom: 30px;
 }
 
-/* Profile picture */
 .profile-pic {
     width: 150px;
     height: 150px;
     border-radius: 50%;
     object-fit: cover;
-    object-position: center 40%; /* centers face */
+    object-position: center 40%;
     border: 2px solid #ddd;
-    flex-shrink: 0; /* prevents shrinking on smaller screens */
+    flex-shrink: 0;
 }
 
-/* Center text */
 .header-text {
     text-align: center;
-    flex: 1 1 300px; /* responsive min width */
+    flex: 1 1 300px;
 }
 
 .header-text h1 {
@@ -95,24 +118,12 @@ body {
 }
 
 .diploma-pic {
-    width: 70px; /* ~2/3 original size */
+    width: 70px;
     height: auto;
     border-radius: 10px;
 }
 
-.graduation-text h2, .graduation-text h3 {
-    margin-bottom: 10px;
-}
-
-.graduation-text ul {
-    list-style: none;
-}
-
-.graduation-text li {
-    margin-bottom: 5px;
-}
-
-/* Courses Section */
+/* Courses */
 .courses-section {
     width: 100%;
     text-align: center;
@@ -174,7 +185,47 @@ body {
 }
 </style>
 </head>
+
 <body>
+
+<!-- LEFT RANDOM SYMBOL BAR -->
+<div class="side-bar left" id="leftBar"></div>
+
+<!-- RIGHT RANDOM SYMBOL BAR -->
+<div class="side-bar right" id="rightBar"></div>
+
+<script>
+/* RANDOM SYMBOL GENERATOR */
+
+const symbols = [
+    "∑","π","μ","η","∫","σ","√","∞","≈","∆","¥",
+    "=SUM()","=IF()","=AVERAGE()","=STDEV()"
+];
+function placeRandomSymbols(barId, count = 12) {
+    const bar = document.getElementById(barId);
+
+    for (let i = 0; i < count; i++) {
+        const sym = document.createElement("div");
+        sym.classList.add("side-symbol");
+        sym.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+
+        const top = Math.random() * 90;  
+        const left = Math.random() * 60; 
+        const size = Math.random() * 2 + 1.2; 
+        const rotate = Math.random() * 80 - 40;
+
+        sym.style.top = top + "%";
+        sym.style.left = left + "%";
+        sym.style.fontSize = size + "rem";
+        sym.style.transform = `rotate(${rotate}deg)`;
+
+        bar.appendChild(sym);
+    }
+}
+
+placeRandomSymbols("leftBar", 10);
+placeRandomSymbols("rightBar", 10);
+</script>
 
 <div class="main-container">
 
@@ -184,7 +235,7 @@ body {
 
         <div class="header-text">
             <h1>Abigail Dodd</h1>
-            <h3<strong>Welcome to my portfolio</strong> h3 >
+            <h2><strong>Welcome to my portfolio</strong></h2>
         </div>
 
         <div class="contact-info">
@@ -219,28 +270,28 @@ body {
                 <p>Studied matrix operations, vector spaces, and linear transformations, applicable to computational modeling and algorithm development.</p>
             </div>
             <div class="course-card">
-                <strong>Economic Cycles and Forcasting</strong>
-                <p>Focused on time series analysis and forecasting methodologies applied to problems typically encountered in economics and finance.</p>
+                <strong>Economic Cycles and Forecasting</strong>
+                <p>Focused on time series analysis and forecasting methodologies applied to problems in economics and finance.</p>
             </div>
             <div class="course-card">
                 <strong>Applied Statistics</strong>
-                <p>Close attention given to issues of interpretation, diagnostics, outliers and influential points, goodness of fit and model selection.</p>
+                <p>Covered interpretation, diagnostics, outliers, influential points, goodness of fit, and model selection.</p>
             </div>
             <div class="course-card">
                 <strong>Numerical Analysis</strong>
-                <p>Study and analysis of numerical methods of complex OED's and systems of equations through code exploration and development in MATLAB.</p>
+                <p>Explored numerical methods for ODEs and systems using MATLAB programming.</p>
             </div>
             <div class="course-card">
                 <strong>Managerial Economics</strong>
-                <p> Integration of microeconomic theory with accounting, finance, marketing and production management.</p>
+                <p>Integrated microeconomic theory with finance, accounting, marketing, and production management.</p>
             </div>
             <div class="course-card">
                 <strong>Graph Theory</strong>
-                <p>Study of combinatorics </p>
+                <p>Study of combinatorics and graph-based structures.</p>
             </div>
             <div class="course-card">
                 <strong>Probability</strong>
-                <p>Study of combinatorial analysis, probability, expectation, parameterized distributions, limit theorems, joint distributions, conditional distributions, and correlation.</p>
+                <p>Covered distributions, expectation, joint distributions, limit theorems, and correlation.</p>
             </div>
         </div>
     </div>
