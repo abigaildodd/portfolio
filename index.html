@@ -193,59 +193,62 @@
   <!-- RIGHT RANDOM SYMBOL BAR -->
   <div class="side-bar right" id="rightBar"></div>
 
- <script>
+<script>
 const symbols = [
-    "∑","π","μ","η","∫","σ","√","∞","≈","∆","¥",
-    "=SUM()","=IF()","=AVERAGE()","=STDEV()","R²","β","γ","θ","λ"
+    "∑","π","μ","η","∫","σ","√","∞","≈","∆","∂","∏","∀","∃","∅","ε","±","∈","∮",
+    "=SUM()","=IF()","=AVERAGE()","=STDEV()","R²","β","γ=f(x)","θ","λ","≅"
 ];
 
 function placeRandomSymbols(barId, count = 15) {
     const bar = document.getElementById(barId);
-    bar.style.position = "relative"; // ensure children are relative to bar
+    bar.style.position = "relative";
     const placed = [];
 
     for (let i = 0; i < count; i++) {
         const sym = document.createElement("div");
         sym.classList.add("side-symbol");
         sym.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+        sym.style.position = "absolute";
+        sym.style.visibility = "hidden"; // hide while measuring
         bar.appendChild(sym);
 
-        let tries = 0;
         let overlap = true;
-        let size, rotate, x, y, width, height;
+        let tries = 0;
 
-        while (overlap && tries < 200) {
-            size = Math.random() * 24 + 16; // font size in px
-            rotate = Math.random() * 80 - 40; // degrees
-
+        while (overlap && tries < 300) {
+            const size = Math.random() * 24 + 16; // font-size px
+            const rotate = Math.random() * 80 - 40; // degrees
             sym.style.fontSize = size + "px";
             sym.style.transform = `rotate(${rotate}deg)`;
 
-            width = sym.offsetWidth;
-            height = sym.offsetHeight;
+            // Random position
+            const x = Math.random() * (bar.clientWidth - size);
+            const y = Math.random() * (bar.clientHeight - size);
+            sym.style.left = x + "px";
+            sym.style.top = y + "px";
 
-            x = Math.random() * (bar.clientWidth - width);
-            y = Math.random() * (bar.clientHeight - height);
+            const rect = sym.getBoundingClientRect();
 
             overlap = placed.some(pos => {
                 return !(
-                    x + width < pos.x ||
-                    x > pos.x + pos.width ||
-                    y + height < pos.y ||
-                    y > pos.y + pos.height
+                    rect.right < pos.left ||
+                    rect.left > pos.right ||
+                    rect.bottom < pos.top ||
+                    rect.top > pos.bottom
                 );
             });
 
             tries++;
         }
 
-        placed.push({x, y, width, height});
-        sym.style.left = x + "px";
-        sym.style.top = y + "px";
+        const finalRect = sym.getBoundingClientRect();
+        placed.push(finalRect);
+
+        sym.style.visibility = "visible";
     }
 }
 
-// Place symbols
+// Run the function
 placeRandomSymbols("leftBar", 20);
 placeRandomSymbols("rightBar", 20);
 </script>
